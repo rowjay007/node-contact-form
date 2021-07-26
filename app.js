@@ -1,24 +1,22 @@
 const express = require("express");
-const exphbs = require("express-handlebars");
-const nodemailer = require("nodemailer");
 const path = require("path");
-const port = 5000
+// const cors = requires("cors");
+const nodemailer = require("nodemailer");
 
 const app = express();
-app.engine("handlebars", exphbs());
-app.set("view engine", "handlebars");
 
-app.use('/public', express.static(path.join(__dirname, 'public')))
+// Static folder
+app.use("/public", express.static(path.join(__dirname, "public")));
 
-//middleware
-
+//  Middleware
+// app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("Hello, World!!");
+  res.send("Hello, World");
 });
 
-app.listen(port, () => {
-  console.log(`Server listening at http://localhost:${port}`);
-});
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => console.log(`Server started... ${PORT}`));
